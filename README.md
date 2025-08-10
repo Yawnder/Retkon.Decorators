@@ -30,4 +30,8 @@ When using `serviceCollection.Decorate<TDecorator, TComponent>();`, it looks for
 
 ### Unsupported use cases
 - `Decorate` that registers the decorator as a Singleton.
+
 ![It doesn't make sense.](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzVsaHZ1Zzk3OGx0ajlkZTQ1eWV3bnFrZzRncW1ydGhnMDFlb3FwYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6ZtlRhUv5G70Ecc8/giphy.gif)
+
+## License
+It's AGPL3, but contact me for a different one and I'll see what can be done.
