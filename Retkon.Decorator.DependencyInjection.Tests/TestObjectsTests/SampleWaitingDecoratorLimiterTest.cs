@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Retkon.Decorator.DependencyInjection.Tests.TestObjectsTests;
 [TestClass]
-public class SampleDecoratorLimiterTest
+public class SampleWaitingDecoratorLimiterTest
 {
 
     [TestMethod]
@@ -15,8 +15,8 @@ public class SampleDecoratorLimiterTest
     {
         // Arrange
 
-        var sampleObject = new SampleComponent();
-        var sampleObjectDecoratorLimiterSettings = new SampleDecoratorLimiterSettings
+        var sampleObject = new SampleWaitingComponent();
+        var sampleObjectDecoratorLimiterSettings = new SampleWaitingDecoratorLimiterSettings
         {
             MinimumMinimum = 5,
             MinimumMaximum = 6,
@@ -24,7 +24,7 @@ public class SampleDecoratorLimiterTest
             MaximumMaximum = 9,
         };
 
-        var sut = new SampleDecoratorLimiter(sampleObject, sampleObjectDecoratorLimiterSettings);
+        var sut = new SampleWaitingDecoratorLimiter(sampleObject, sampleObjectDecoratorLimiterSettings);
 
         var min = 10;
         var max = 20;

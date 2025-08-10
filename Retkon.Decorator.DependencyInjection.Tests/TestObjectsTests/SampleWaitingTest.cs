@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Retkon.Decorator.DependencyInjection.Tests.TestObjectsTests;
 [TestClass]
-public class SampleTest
+public class SampleWaitingTest
 {
 
     [TestMethod]
-    public async Task SampleComponent()
+    public async Task SampleWaitingComponent_Basic()
     {
         // Arrange
 
-        var sut = new SampleComponent();
+        var sut = new SampleWaitingComponent();
 
         var min = 10;
         var max = 20;

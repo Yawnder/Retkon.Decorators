@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Retkon.Decorator.DependencyInjection.Tests.TestObjects;
-internal class SampleDecoratorLimiter : SampleDecorator
+internal class SampleWaitingDecoratorLimiter : SampleWaitingDecorator
 {
-    private readonly SampleDecoratorLimiterSettings sampleObjectDecoratorLimiterSettings;
+    private readonly SampleWaitingDecoratorLimiterSettings sampleObjectDecoratorLimiterSettings;
 
-    public SampleDecoratorLimiter(
-        ISampleComponent sampleObject,
-        SampleDecoratorLimiterSettings sampleObjectDecoratorLimiterSettings)
+    public SampleWaitingDecoratorLimiter(
+        ISampleWaitingComponent sampleObject,
+        SampleWaitingDecoratorLimiterSettings sampleObjectDecoratorLimiterSettings)
         : base(sampleObject)
     {
         this.sampleObjectDecoratorLimiterSettings = sampleObjectDecoratorLimiterSettings;

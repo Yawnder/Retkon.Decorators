@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Retkon.Decorator.DependencyInjection.Tests.TestObjects;
-internal abstract class SampleDecorator : ISampleComponent
+internal abstract class SampleWaitingDecorator : ISampleWaitingComponent
 {
-    private readonly ISampleComponent sampleObject;
+    private readonly ISampleWaitingComponent sampleObject;
 
-    public SampleDecorator(
-        ISampleComponent sampleObject)
+    public SampleWaitingDecorator(
+        ISampleWaitingComponent sampleObject)
     {
         this.sampleObject = sampleObject;
     }

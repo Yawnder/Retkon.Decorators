@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Retkon.Decorator.DependencyInjection.Tests.TestObjects;
-internal class SampleDecoratorLimiterSettings
+internal class SampleWaitingDecoratorLimiterSettings
 {
 
     public int MinimumMinimum { get; init; }

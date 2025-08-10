@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Retkon.Decorator.DependencyInjection.Tests.TestObjects;
-internal class SampleComponent : ISampleComponent
+internal class SampleWaitingComponent : ISampleWaitingComponent
 {
     public async Task<int> JustWaitPlease(int mininum, int maximum)
     {

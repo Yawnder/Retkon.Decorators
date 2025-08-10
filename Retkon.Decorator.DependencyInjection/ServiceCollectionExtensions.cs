@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Retkon.Decorator.DependencyInjection;
+using Retkon.Decorator.DependencyInjection.Models;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -7,7 +9,8 @@ namespace Retkon.Decorator;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection Decorate<TDecorator, TComponent>(this IServiceCollection serviceCollection)
+    //TODO: Parameters to single Option Parameter.
+    public static IServiceCollection Decorate<TDecorator, TComponent>(this IServiceCollection serviceCollection, DecorateOptions? decorateOptions = null)
         where TDecorator : class, TComponent
     {
         //TODO: If nothing decorated, throw.
@@ -18,23 +21,63 @@ public static class ServiceCollectionExtensions
 
             if (currentComponentServiceDescriptor.ServiceType == typeof(TComponent))
             {
+                var currentDecorationServiceDescriptor = currentComponentServiceDescriptor as DecorationServiceDescriptor;
+
+                if (currentDecorationServiceDescriptor != null && (
+                    (decorateOptions?.SkippedDecoratorTypes != null && decorateOptions.SkippedDecoratorTypes.Contains(currentDecorationServiceDescriptor.DecoratorType ?? currentDecorationServiceDescriptor.ComponentType)) ||
+                    (decorateOptions?.SkippedDecoratorTypes == null && currentDecorationServiceDescriptor.ComponentType == typeof(TDecorator)) ||
+                    (decorateOptions?.SkipSameDecoratorType != false && currentDecorationServiceDescriptor.DecoratorType == typeof(TDecorator))))
+                    continue;
+
                 var decoratingKey = Guid.NewGuid();
-                ServiceDescriptor newComponentServiceDescriptor;
+                DecorationServiceDescriptor newComponentServiceDescriptor;
                 if (currentComponentServiceDescriptor.ImplementationInstance != null)
                 {
-                    newComponentServiceDescriptor = new ServiceDescriptor(currentComponentServiceDescriptor.ServiceType, decoratingKey, currentComponentServiceDescriptor.ImplementationInstance);
+                    newComponentServiceDescriptor = new DecorationServiceDescriptor(
+                        typeof(TDecorator),
+                        currentComponentServiceDescriptor.ImplementationInstance.GetType(),
+                        currentComponentServiceDescriptor.ServiceType,
+                        decoratingKey,
+                        currentComponentServiceDescriptor.ImplementationInstance);
                 }
                 else if (currentComponentServiceDescriptor.IsKeyedService && currentComponentServiceDescriptor.KeyedImplementationFactory != null)
                 {
-                    newComponentServiceDescriptor = new ServiceDescriptor(currentComponentServiceDescriptor.ServiceType, decoratingKey, currentComponentServiceDescriptor.KeyedImplementationFactory, currentComponentServiceDescriptor.Lifetime);
+                    newComponentServiceDescriptor = new DecorationServiceDescriptor(
+                        typeof(TDecorator),
+                        currentDecorationServiceDescriptor?.ComponentType ?? typeof(TComponent),
+                        currentComponentServiceDescriptor.ServiceType,
+                        decoratingKey,
+                        currentComponentServiceDescriptor.KeyedImplementationFactory,
+                        currentComponentServiceDescriptor.Lifetime);
                 }
                 else if (currentComponentServiceDescriptor.ImplementationFactory != null)
                 {
-                    newComponentServiceDescriptor = new ServiceDescriptor(currentComponentServiceDescriptor.ServiceType, decoratingKey, (sp, key) => currentComponentServiceDescriptor.ImplementationFactory.Invoke(sp), currentComponentServiceDescriptor.Lifetime);
+                    newComponentServiceDescriptor = new DecorationServiceDescriptor(
+                        typeof(TDecorator),
+                        currentDecorationServiceDescriptor?.ComponentType ?? typeof(TComponent),
+                        currentComponentServiceDescriptor.ServiceType,
+                        decoratingKey,
+                        (sp, key) => currentComponentServiceDescriptor.ImplementationFactory.Invoke(sp),
+                        currentComponentServiceDescriptor.Lifetime);
+                }
+                else if (currentComponentServiceDescriptor.IsKeyedService && currentComponentServiceDescriptor.KeyedImplementationType != null)
+                {
+                    newComponentServiceDescriptor = new DecorationServiceDescriptor(
+                        typeof(TDecorator),
+                        currentComponentServiceDescriptor.KeyedImplementationType,
+                        currentComponentServiceDescriptor.ServiceType,
+                        decoratingKey,
+                        currentComponentServiceDescriptor.KeyedImplementationType,
+                        currentComponentServiceDescriptor.Lifetime);
                 }
                 else if (currentComponentServiceDescriptor.ImplementationType != null)
                 {
-                    newComponentServiceDescriptor = new ServiceDescriptor(currentComponentServiceDescriptor.ServiceType, decoratingKey, currentComponentServiceDescriptor.ImplementationType, currentComponentServiceDescriptor.Lifetime);
+                    newComponentServiceDescriptor = new DecorationServiceDescriptor(
+                        typeof(TDecorator),
+                        currentComponentServiceDescriptor.ImplementationType,
+                        currentComponentServiceDescriptor.ServiceType, decoratingKey,
+                        currentComponentServiceDescriptor.ImplementationType,
+                        currentComponentServiceDescriptor.Lifetime);
                 }
                 else
                 {
@@ -43,7 +86,9 @@ public static class ServiceCollectionExtensions
 
                 serviceCollection[i] = newComponentServiceDescriptor;
 
-                var decoratorServiceDescriptor = new ServiceDescriptor(
+                var decoratorServiceDescriptor = new DecorationServiceDescriptor(
+                    null,
+                    typeof(TDecorator),
                     currentComponentServiceDescriptor.ServiceType,
                     currentComponentServiceDescriptor.ServiceKey,
                     (sp, key) =>
@@ -53,7 +98,7 @@ public static class ServiceCollectionExtensions
                         return decorator;
                     }, currentComponentServiceDescriptor.Lifetime);
 
-                serviceCollection.Add(decoratorServiceDescriptor);
+                serviceCollection.Insert(i + 1, decoratorServiceDescriptor);
 
                 //TODO: Cases to handle
                 //serviceCollection.AddScoped<IDisposable>();
