@@ -105,7 +105,7 @@ public class ServiceCollectionExtensionsTest_KeyedTransient
     }
 
     [TestMethod]
-    public void ServiceCollectionExtensions_SampleAdding_DecorateTwice_ForcedReapply("MyKey")
+    public void ServiceCollectionExtensions_SampleAdding_DecorateTwice_ForcedReapply()
     {
         // Arrange
 
@@ -136,7 +136,7 @@ public class ServiceCollectionExtensionsTest_KeyedTransient
     }
 
     [TestMethod]
-    public void ServiceCollectionExtensions_SampleAdding_DecorateTwice_ForcedTotal("MyKey")
+    public void ServiceCollectionExtensions_SampleAdding_DecorateTwice_ForcedTotal()
     {
         // Arrange
 
