@@ -4,7 +4,19 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <LangVersion>latest</LangVersion>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Title>Retkon's Decorators Dependency Injection</Title>
+    <Description>A facilitator to register Decorators in Microsoft's DI.</Description>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Retkon,Decorator,Dependency Injection,DI</PackageTags>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Authors>Yawnder</Authors>
+    <Company>Retkon</Company>
+    <Version>1.0.1</Version>
+    <RepositoryUrl>https://github.com/Yawnder/Retkon.Decorators</RepositoryUrl>
+
   </PropertyGroup>
 
   <ItemGroup>
