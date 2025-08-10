@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Retkon.Decorator.DependencyInjection\Retkon.Decorator.DependencyInjection.csproj" />
+    <ProjectReference Include="..\Retkon.Decorators.DependencyInjection\Retkon.Decorators.DependencyInjection.csproj" />
   </ItemGroup>
 
   <ItemGroup>

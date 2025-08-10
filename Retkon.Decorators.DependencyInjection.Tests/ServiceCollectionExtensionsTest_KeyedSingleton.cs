@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Retkon.Decorator.DependencyInjection.Tests.TestObjects;
+using Retkon.Decorators.DependencyInjection.Tests.TestObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Retkon.Decorator.DependencyInjection.Tests;
+namespace Retkon.Decorators.DependencyInjection.Tests;
 [TestClass]
-public class ServiceCollectionExtensionsTest
+public class ServiceCollectionExtensionsTest_KeyedSingleton
 {
     [TestMethod]
     public async Task ServiceCollectionExtensions_SampleWaiting_Decorate()
@@ -33,11 +33,11 @@ public class ServiceCollectionExtensionsTest
         serviceCollection.AddSingleton(sampleObjectDecoratorLimiterSettings);
 
         // Act
-        serviceCollection.AddSingleton<ISampleWaitingComponent, SampleWaitingComponent>();
+        serviceCollection.AddKeyedSingleton<ISampleWaitingComponent, SampleWaitingComponent>("MyKey");
         serviceCollection.Decorate<SampleWaitingDecoratorLimiter, ISampleWaitingComponent>();
         var serviceProvider = serviceCollection.BuildServiceProvider(true);
 
-        var sampleWaitingComponent = serviceProvider.GetRequiredService<ISampleWaitingComponent>();
+        var sampleWaitingComponent = serviceProvider.GetRequiredKeyedService<ISampleWaitingComponent>("MyKey");
 
         for (int i = 0; i < testCount; i++)
         {
@@ -61,7 +61,7 @@ public class ServiceCollectionExtensionsTest
         var serviceCollection = new ServiceCollection();
 
         // Act
-        serviceCollection.AddSingleton<ISampleStoring, SampleStoringComponent>();
+        serviceCollection.AddKeyedSingleton<ISampleStoring, SampleStoringComponent>("MyKey");
         serviceCollection.Decorate<SampleAddingDecorator, ISampleStoring>();
 
         /*Note: The DI stack should be:
@@ -71,7 +71,7 @@ public class ServiceCollectionExtensionsTest
 
         var serviceProvider = serviceCollection.BuildServiceProvider(true);
 
-        var sampleStoring = serviceProvider.GetRequiredService<ISampleStoring>();
+        var sampleStoring = serviceProvider.GetRequiredKeyedService<ISampleStoring>("MyKey");
         sampleStoring.Store(0);
 
         // Assert
@@ -86,7 +86,7 @@ public class ServiceCollectionExtensionsTest
         var serviceCollection = new ServiceCollection();
 
         // Act
-        serviceCollection.AddSingleton<ISampleStoring, SampleStoringComponent>();
+        serviceCollection.AddKeyedSingleton<ISampleStoring, SampleStoringComponent>("MyKey");
         serviceCollection.Decorate<SampleAddingDecorator, ISampleStoring>();
         serviceCollection.Decorate<SampleAddingDecorator, ISampleStoring>();
 
@@ -97,7 +97,7 @@ public class ServiceCollectionExtensionsTest
 
         var serviceProvider = serviceCollection.BuildServiceProvider(true);
 
-        var sampleStoring = serviceProvider.GetRequiredService<ISampleStoring>();
+        var sampleStoring = serviceProvider.GetRequiredKeyedService<ISampleStoring>("MyKey");
         sampleStoring.Store(0);
 
         // Assert
@@ -110,7 +110,7 @@ public class ServiceCollectionExtensionsTest
         // Arrange
 
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<ISampleStoring, SampleStoringComponent>();
+        serviceCollection.AddKeyedSingleton<ISampleStoring, SampleStoringComponent>("MyKey");
 
         // Act
         serviceCollection.Decorate<SampleAddingDecorator, ISampleStoring>();
@@ -128,7 +128,7 @@ public class ServiceCollectionExtensionsTest
 
         var serviceProvider = serviceCollection.BuildServiceProvider(true);
 
-        var sampleStoring = serviceProvider.GetRequiredService<ISampleStoring>();
+        var sampleStoring = serviceProvider.GetRequiredKeyedService<ISampleStoring>("MyKey");
         sampleStoring.Store(0);
 
         // Assert
@@ -141,7 +141,7 @@ public class ServiceCollectionExtensionsTest
         // Arrange
 
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<ISampleStoring, SampleStoringComponent>();
+        serviceCollection.AddKeyedSingleton<ISampleStoring, SampleStoringComponent>("MyKey");
 
         // Act
         serviceCollection.Decorate<SampleAddingDecorator, ISampleStoring>();
@@ -161,7 +161,7 @@ public class ServiceCollectionExtensionsTest
 
         var serviceProvider = serviceCollection.BuildServiceProvider(true);
 
-        var sampleStoring = serviceProvider.GetRequiredService<ISampleStoring>();
+        var sampleStoring = serviceProvider.GetRequiredKeyedService<ISampleStoring>("MyKey");
         sampleStoring.Store(0);
 
         // Assert
@@ -175,7 +175,7 @@ public class ServiceCollectionExtensionsTest
         var serviceCollection = new ServiceCollection();
 
         // Act
-        serviceCollection.AddSingleton<ISampleStoring, SampleStoringComponent>();
+        serviceCollection.AddKeyedSingleton<ISampleStoring, SampleStoringComponent>("MyKey");
         serviceCollection.Decorate<SampleAddingDecorator, ISampleStoring>();
         serviceCollection.Decorate<SampleMultiplyDecorator, ISampleStoring>();
         serviceCollection.Decorate<SampleAddingDecorator, ISampleStoring>();
@@ -192,7 +192,7 @@ public class ServiceCollectionExtensionsTest
 
         var serviceProvider = serviceCollection.BuildServiceProvider(true);
 
-        var sampleStoring = serviceProvider.GetRequiredService<ISampleStoring>();
+        var sampleStoring = serviceProvider.GetRequiredKeyedService<ISampleStoring>("MyKey");
         sampleStoring.Store(0);
 
         // Assert
@@ -206,7 +206,7 @@ public class ServiceCollectionExtensionsTest
         var serviceCollection = new ServiceCollection();
 
         // Act
-        serviceCollection.AddSingleton<ISampleStoring, SampleStoringComponent>();
+        serviceCollection.AddKeyedSingleton<ISampleStoring, SampleStoringComponent>("MyKey");
         serviceCollection.Decorate<SampleAddingDecorator, ISampleStoring>();
         serviceCollection.Decorate<SampleMultiplyDecorator, ISampleStoring>();
         serviceCollection.Decorate<SampleAddingDecorator, ISampleStoring>(
@@ -226,7 +226,7 @@ public class ServiceCollectionExtensionsTest
 
         var serviceProvider = serviceCollection.BuildServiceProvider(true);
 
-        var sampleStoring = serviceProvider.GetRequiredService<ISampleStoring>();
+        var sampleStoring = serviceProvider.GetRequiredKeyedService<ISampleStoring>("MyKey");
         sampleStoring.Store(0);
 
         // Assert

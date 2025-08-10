@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Retkon.Decorator.DependencyInjection;
+namespace Retkon.Decorators.DependencyInjection;
 public class DecorateOptions
 {
 

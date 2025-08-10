@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retkon.Decorator.DependencyInjection", "Retkon.Decorator.DependencyInjection\Retkon.Decorator.DependencyInjection.csproj", "{4FC8118C-5341-44D0-9D20-7D3EFCCA9CC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retkon.Decorators.DependencyInjection", "Retkon.Decorators.DependencyInjection\Retkon.Decorators.DependencyInjection.csproj", "{4FC8118C-5341-44D0-9D20-7D3EFCCA9CC9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{578B5AAA-5A27-4A34-85A1-6E24BAFB2EB8}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D741EC41-080E-437B-BA93-34509C3A464F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retkon.Decorator.DependencyInjection.Tests", "Retkon.Decorator.DependencyInjection.Tests\Retkon.Decorator.DependencyInjection.Tests.csproj", "{17C423D6-0F35-41AD-9C7E-9C2A652D3912}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retkon.Decorators.DependencyInjection.Tests", "Retkon.Decorators.DependencyInjection.Tests\Retkon.Decorators.DependencyInjection.Tests.csproj", "{17C423D6-0F35-41AD-9C7E-9C2A652D3912}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

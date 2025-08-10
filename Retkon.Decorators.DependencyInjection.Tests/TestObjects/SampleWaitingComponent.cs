@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Retkon.Decorator.DependencyInjection.Tests.TestObjects;
+namespace Retkon.Decorators.DependencyInjection.Tests.TestObjects;
 internal class SampleWaitingComponent : ISampleWaitingComponent
 {
     public async Task<int> JustWaitPlease(int mininum, int maximum)

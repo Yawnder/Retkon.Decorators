@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Retkon.Decorator.DependencyInjection;
-using Retkon.Decorator.DependencyInjection.Models;
+using Retkon.Decorators.DependencyInjection;
+using Retkon.Decorators.DependencyInjection.Models;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
-namespace Retkon.Decorator;
+namespace Retkon.Decorators;
 #pragma warning restore IDE0130 // Namespace does not match folder structure
 
 public static class ServiceCollectionExtensions

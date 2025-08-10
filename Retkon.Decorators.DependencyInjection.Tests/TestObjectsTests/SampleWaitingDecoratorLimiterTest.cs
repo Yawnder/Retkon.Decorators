@@ -1,11 +1,11 @@
-﻿using Retkon.Decorator.DependencyInjection.Tests.TestObjects;
+﻿using Retkon.Decorators.DependencyInjection.Tests.TestObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Retkon.Decorator.DependencyInjection.Tests.TestObjectsTests;
+namespace Retkon.Decorators.DependencyInjection.Tests.TestObjectsTests;
 [TestClass]
 public class SampleWaitingDecoratorLimiterTest
 {

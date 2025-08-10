@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Retkon.Decorator.DependencyInjection.Models;
+namespace Retkon.Decorators.DependencyInjection.Models;
 [DebuggerDisplay("{DebuggerToString(),nq}")]
 internal class DecorationServiceDescriptor : ServiceDescriptor
 {
