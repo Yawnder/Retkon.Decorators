@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Retkon.Decorators.DependencyInjection.Tests.TestObjects;
+internal class SampleWaitingDecoratorLimiter : SampleWaitingDecorator
+{
+    private readonly SampleWaitingDecoratorLimiterSettings sampleObjectDecoratorLimiterSettings;
+
+    public SampleWaitingDecoratorLimiter(
+        ISampleWaitingComponent sampleObject,
+        SampleWaitingDecoratorLimiterSettings sampleObjectDecoratorLimiterSettings)
+        : base(sampleObject)
+    {
+        this.sampleObjectDecoratorLimiterSettings = sampleObjectDecoratorLimiterSettings;
+    }
+
+    protected override Task<bool> PreJustWaitPlease(ref int mininum, ref int maximum, out int result)
+    {
+        mininum = Math.Clamp(mininum, this.sampleObjectDecoratorLimiterSettings.MinimumMinimum, this.sampleObjectDecoratorLimiterSettings.MinimumMaximum);
+        maximum = Math.Clamp(maximum, this.sampleObjectDecoratorLimiterSettings.MaximumMinimum, this.sampleObjectDecoratorLimiterSettings.MaximumMaximum);
+        result = 0;
+
+        return Task.FromResult(false);
+    }
+
+}

@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Retkon.Decorators.DependencyInjection.Tests.TestObjects;
+internal class SampleAddingDecorator : ISampleStoring
+{
+    private readonly ISampleStoring sampleAdding;
+
+    public int Value => this.sampleAdding.Value;
+
+    public SampleAddingDecorator(
+        ISampleStoring sampleAdding)
+    {
+        this.sampleAdding = sampleAdding;
+    }
+
+    public void Store(int value)
+    {
+        Console.WriteLine($"Value {value} increased: {value + 1}");
+        this.sampleAdding.Store(++value);
+    }
+}
