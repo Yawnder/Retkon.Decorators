@@ -14,7 +14,7 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <Authors>Yawnder</Authors>
     <Company>Retkon</Company>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <RepositoryUrl>https://github.com/Yawnder/Retkon.Decorators</RepositoryUrl>
 
   </PropertyGroup>

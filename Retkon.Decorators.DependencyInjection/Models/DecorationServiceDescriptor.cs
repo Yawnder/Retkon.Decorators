@@ -14,21 +14,25 @@ internal class DecorationServiceDescriptor : ServiceDescriptor
 
     public Type? DecoratorType { get; init; }
     public Type ComponentType { get; init; }
+    public Guid? ComponentServiceKey { get; init; }
 
     public DecorationServiceDescriptor(
         Type? decoratorType,
         Type componentType,
+        Guid? componentServiceKey,
         Type serviceType,
         object instance)
         : base(serviceType, instance)
     {
         this.DecoratorType = decoratorType;
         this.ComponentType = componentType;
+        this.ComponentServiceKey = componentServiceKey;
     }
 
     public DecorationServiceDescriptor(
         Type? decoratorType,
         Type componentType,
+        Guid? componentServiceKey,
         Type serviceType,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type implementationType,
         ServiceLifetime lifetime)
@@ -36,11 +40,13 @@ internal class DecorationServiceDescriptor : ServiceDescriptor
     {
         this.DecoratorType = decoratorType;
         this.ComponentType = componentType;
+        this.ComponentServiceKey = componentServiceKey;
     }
 
     public DecorationServiceDescriptor(
         Type? decoratorType,
         Type componentType,
+        Guid? componentServiceKey,
         Type serviceType,
         object? serviceKey,
         object instance)
@@ -48,11 +54,13 @@ internal class DecorationServiceDescriptor : ServiceDescriptor
     {
         this.DecoratorType = decoratorType;
         this.ComponentType = componentType;
+        this.ComponentServiceKey = componentServiceKey;
     }
 
     public DecorationServiceDescriptor(
         Type? decoratorType,
         Type componentType,
+        Guid? componentServiceKey,
         Type serviceType,
         Func<IServiceProvider, object> factory,
         ServiceLifetime lifetime)
@@ -60,11 +68,13 @@ internal class DecorationServiceDescriptor : ServiceDescriptor
     {
         this.DecoratorType = decoratorType;
         this.ComponentType = componentType;
+        this.ComponentServiceKey = componentServiceKey;
     }
 
     public DecorationServiceDescriptor(
         Type? decoratorType,
         Type componentType,
+        Guid? componentServiceKey,
         Type serviceType,
         object? serviceKey,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type implementationType,
@@ -73,11 +83,13 @@ internal class DecorationServiceDescriptor : ServiceDescriptor
     {
         this.DecoratorType = decoratorType;
         this.ComponentType = componentType;
+        this.ComponentServiceKey = componentServiceKey;
     }
 
     public DecorationServiceDescriptor(
         Type? decoratorType,
         Type componentType,
+        Guid? componentServiceKey,
         Type serviceType,
         object? serviceKey,
         Func<IServiceProvider, object?, object> factory,
@@ -86,18 +98,33 @@ internal class DecorationServiceDescriptor : ServiceDescriptor
     {
         this.DecoratorType = decoratorType;
         this.ComponentType = componentType;
+        this.ComponentServiceKey = componentServiceKey;
     }
 
     private string DebuggerToString()
     {
-        if (this.DecoratorType == null)
+        var sb = new StringBuilder();
+        sb.Append(this.ComponentType.Name);
+        sb.Append(" (");
+
+        if (this.IsKeyedService)
         {
-            return this.ComponentType.Name;
+            sb.Append(this.ServiceKey);
         }
         else
         {
-            return $"{this.DecoratorType.Name} ({this.ComponentType.Name})";
+            sb.Append("[No Key]");
         }
+
+        if (this.ComponentServiceKey != null)
+        {
+            sb.Append("<-");
+            sb.Append(this.ComponentServiceKey);
+        }
+
+        sb.Append(")");
+
+        return sb.ToString();
     }
 
 }

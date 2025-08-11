@@ -10,14 +10,13 @@ public class DecorateOptions
 {
 
     /// <summary>
-    /// If true, will not Decorate a registration already decorated by the same Decorator type.
+    /// If true, Components already decorated by the same Decorator type will be skipped.
     /// </summary>
     public bool SkipSameDecoratorType { get; init; } = true;
 
     /// <summary>
     /// If null, decorator of the same type will be skipped.
     /// </summary>
-    private ReadOnlyCollection<Type>? _skippedDecoratorTypes;
     public IReadOnlyList<Type>? SkippedDecoratorTypes
     {
         get => this._skippedDecoratorTypes;
@@ -27,5 +26,25 @@ public class DecorateOptions
                 this._skippedDecoratorTypes = new List<Type>(value).AsReadOnly();
         }
     }
+    private ReadOnlyCollection<Type>? _skippedDecoratorTypes;
+
+    /// <summary>
+    /// Registers the Decorator with that ServiceKey specifically.
+    /// </summary>
+    public string? DecoratorServiceKey { get; set; }
+
+    /// <summary>
+    /// If null, will decorate services with any keys.
+    /// </summary>
+    public IReadOnlyList<object>? DecoratedServiceKeys
+    {
+        get => this._decoratedServiceKeys;
+        init
+        {
+            if (value != null)
+                this._decoratedServiceKeys = new List<object>(value).AsReadOnly();
+        }
+    }
+    private ReadOnlyCollection<object>? _decoratedServiceKeys;
 
 }
